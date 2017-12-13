@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.15
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircusRenzOpReis.PresentationASP", "CircusRenzOpReis\CircusRenzOpReis.PresentationASP.csproj", "{7FE741C3-E2A5-4678-85E4-2C77C937C403}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircusRenzOpReis.Tests", "CircusRenzOpReis.Tests\CircusRenzOpReis.Tests.csproj", "{21BA6BF5-E390-4437-ACE7-E57035AC0231}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{A0DF3BE8-6D58-4245-92AA-588693A24809}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Circustrein", "..\..\..\..\..\Desktop\Circustrein\Circustrein\Circustrein.csproj", "{462914C2-107B-4A20-8142-BF4483B2CFF8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7FE741C3-E2A5-4678-85E4-2C77C937C403}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FE741C3-E2A5-4678-85E4-2C77C937C403}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FE741C3-E2A5-4678-85E4-2C77C937C403}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FE741C3-E2A5-4678-85E4-2C77C937C403}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21BA6BF5-E390-4437-ACE7-E57035AC0231}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21BA6BF5-E390-4437-ACE7-E57035AC0231}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21BA6BF5-E390-4437-ACE7-E57035AC0231}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21BA6BF5-E390-4437-ACE7-E57035AC0231}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0DF3BE8-6D58-4245-92AA-588693A24809}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0DF3BE8-6D58-4245-92AA-588693A24809}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0DF3BE8-6D58-4245-92AA-588693A24809}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0DF3BE8-6D58-4245-92AA-588693A24809}.Release|Any CPU.Build.0 = Release|Any CPU
+		{462914C2-107B-4A20-8142-BF4483B2CFF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{462914C2-107B-4A20-8142-BF4483B2CFF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{462914C2-107B-4A20-8142-BF4483B2CFF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{462914C2-107B-4A20-8142-BF4483B2CFF8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

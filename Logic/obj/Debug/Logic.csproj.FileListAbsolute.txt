@@ -1,0 +1,5 @@
+c:\users\daphn\onedrive\documenten\visual studio 2017\Projects\CircusRenzOpReis\Logic\bin\Debug\Logic.dll
+c:\users\daphn\onedrive\documenten\visual studio 2017\Projects\CircusRenzOpReis\Logic\bin\Debug\Logic.pdb
+c:\users\daphn\onedrive\documenten\visual studio 2017\Projects\CircusRenzOpReis\Logic\obj\Debug\Logic.csprojResolveAssemblyReference.cache
+c:\users\daphn\onedrive\documenten\visual studio 2017\Projects\CircusRenzOpReis\Logic\obj\Debug\Logic.dll
+c:\users\daphn\onedrive\documenten\visual studio 2017\Projects\CircusRenzOpReis\Logic\obj\Debug\Logic.pdb
