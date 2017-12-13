@@ -94,3 +94,6 @@ c:\users\daphn\onedrive\documenten\visual studio 2017\Projects\CircusRenzOpReis\
 c:\users\daphn\onedrive\documenten\visual studio 2017\Projects\CircusRenzOpReis\CircusRenzOpReis\obj\Debug\CircusRenzOpReis.PresentationASP.csprojResolveAssemblyReference.cache
 c:\users\daphn\onedrive\documenten\visual studio 2017\Projects\CircusRenzOpReis\CircusRenzOpReis\obj\Debug\CircusRenzOpReis.dll
 c:\users\daphn\onedrive\documenten\visual studio 2017\Projects\CircusRenzOpReis\CircusRenzOpReis\obj\Debug\CircusRenzOpReis.pdb
+D:\Software Projecten\Circus Renz Op Reis\CircusRenzOpReis\obj\Debug\CircusRenzOpReis.PresentationASP.csprojResolveAssemblyReference.cache
+D:\Software Projecten\Circus Renz Op Reis\CircusRenzOpReis\obj\Debug\CircusRenzOpReis.dll
+D:\Software Projecten\Circus Renz Op Reis\CircusRenzOpReis\obj\Debug\CircusRenzOpReis.pdb

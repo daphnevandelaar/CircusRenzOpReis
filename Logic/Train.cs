@@ -8,10 +8,9 @@ namespace CircuzRenzOpReis.Logic
 {
     public class Train : ITrain, ICloneable
     {
-        // fields
         private List<Wagon> wagons = new List<Wagon>();
 
-        // properties
+        #region Property
         public List<Wagon> Wagons
         {
             get
@@ -23,15 +22,14 @@ namespace CircuzRenzOpReis.Logic
                 wagons = value;
             }
         }
-
-        // constructors
+#endregion
+        #region Constructor
         public Train()
         {
 
         }
-
-        // METHODS
-
+#endregion
+        #region Methodes
         //Beste groepjes van dieren maken en terug geven in een lijst van wagonnen
         public List<Wagon> Arrange(List<Animal> inputAnimals)
         {
@@ -84,7 +82,7 @@ namespace CircuzRenzOpReis.Logic
                     Wagon w = wagonsWhichCanBeFilled[i];
                     if (w.animals.Contains(new Animal(true, AnimalSize.Medium)))                                                   //Als het een middel carnivoor is, mag de grote herbivoor toegevoegd worden
                     {
-                        if (w.addAnimal(largeHerbsWhichNeedToBePlaced[0]))                                                         
+                        if (w.addAnimal(largeHerbsWhichNeedToBePlaced[0]))
                         {
                             largeHerbsWhichNeedToBePlaced.RemoveAt(0);                                                             //Het toegevoegde dier uit de lijst van dieren zonder wagon halen
 
@@ -98,24 +96,24 @@ namespace CircuzRenzOpReis.Logic
                 }
             }
 
-            //3. Bestaande wagons opvullen
+            //3. Overgebleven dieren nog in een wagon doen
             animalsLeft.AddRange(smallHerbsWhichNeedToBePlaced);
             animalsLeft.AddRange(mediumHerbsWhichNeedToBePlaced);
             animalsLeft.AddRange(largeHerbsWhichNeedToBePlaced);
             List<Animal> animalsToAdd;
 
-            while ((animalsLeft.Count) > 0) // while there's animals left
+            while ((animalsLeft.Count) > 0)                                                                                         //Kijken of er dieren zijn
             {
-                if (wagonsWhichCanBeFilled.Count <= 0) // if there's no more wagons to fill, create a new one
+                if (wagonsWhichCanBeFilled.Count <= 0)                                                                              //Kijken of er wagonnetjes zijn waar al dieren in zitten
                 {
                     wagonsWhichCanBeFilled.Add(new Wagon());
                 }
 
-                // get the best solution
-                animalsToAdd = solveWagon(wagonsWhichCanBeFilled[0], animalsLeft);
+                //Kijken naar de best mogelijke combinatie om de wagon te vullen
+                animalsToAdd = SortWagonWithCheckCombinations(wagonsWhichCanBeFilled[0], animalsLeft);
 
-                // move these animals to the wagon
-                for (int i = animalsToAdd.Count - 1; i >= 0; i--)
+                //Plaats de dieren in de wagon
+                for (int i = 0; i < animalsToAdd.Count; i++)
                 {
                     if (wagonsWhichCanBeFilled[0].addAnimal(animalsToAdd[i]))
                     {
@@ -124,21 +122,19 @@ namespace CircuzRenzOpReis.Logic
                     animalsToAdd.RemoveAt(i);
                 }
 
-                // move the wagon to the trains list of wagons
+                //Verplaats de wagon naar de trein
                 Wagons.Add(wagonsWhichCanBeFilled[0]);
-                //this.Wagons.Add(wagonsNotDoneWith[0]);
                 wagonsWhichCanBeFilled.RemoveAt(0);
 
-                // clear the array, just in case
+                //Opschonen 
                 animalsToAdd.Clear();
             }
 
-            // in case the animals ran out sooner than all wagons were filled:
-            // move all 'wagons not done with' into the train
+            //Als de animals eerder geplaatst zijn, dan dat alle wagons gevuld zijn:
+            //Voeg alle wagons toe aan de trein
             Wagons.AddRange(wagonsWhichCanBeFilled);
             wagonsWhichCanBeFilled.Clear();
 
-            // return the list of wagons
             return Wagons;
         }
 
@@ -152,16 +148,16 @@ namespace CircuzRenzOpReis.Logic
         }
 
         // solves a wagon, returns the animals that should be added
-        public List<Animal> solveWagon(Wagon original, List<Animal> Animals)
+        public List<Animal> SortWagonWithCheckCombinations(Wagon originalWagon, List<Animal> unplacedAnimals)
         {
             List<Animal> AnimalsToAdd = new List<Animal>();
             bool hasCarnivore = false;
             AnimalSize carnivoreSize = 0;
             int[] animalAmounts = new int[] { 0, 0, 0, 0, 0, 0 }; // small herbivore, medium herbivore, large herbivore, small carnivore, medium carnivore, large carnivore
 
-            // 1. remove animals from the list that can not be placed
-            // loop through all animals in the wagon
-            foreach (Animal a in original.animals)
+            //1. Verwijder de dieren uit de lijst die niet geplaatst kunnen worden            
+            //Bekijk alle dieren in de wagon of er een carnivoor in zit             
+            foreach (Animal a in originalWagon.animals)
             {
                 if (a.Carnivore)
                 {
@@ -171,20 +167,20 @@ namespace CircuzRenzOpReis.Logic
                 }
             }
 
-            // loop through all animals still to be placed
-            for (int i = Animals.Count - 1; i >= 0; i--)
+            //Bekijk alle dieren die nog geplaatst moeten worden
+            for (int i = 0; i < unplacedAnimals.Count; i++)
             {
-                // carnivores can be removed if there is one in the wagon already
-                // and all animals can be removed if the carnivore in the wagons is bigger or of equal size
-                if (hasCarnivore && (Animals[i].Carnivore || carnivoreSize >= Animals[i].Size))
+                //Carnivoren kunnen niet geplaatst worden als er al een carnivoor in de wagon zit
+                //Daarnaast kunnen alle dieren verwijderd worden als de carnivoor groter of gelijke grootte is 
+                if (hasCarnivore && (unplacedAnimals[i].Carnivore || carnivoreSize >= unplacedAnimals[i].Size))
                 {
                     continue;
                 }
 
-                // counting
-                if (Animals[i].Carnivore)
+                //Tel het geheel van dieren in de wagon
+                if (unplacedAnimals[i].Carnivore)
                 {
-                    switch (Animals[i].Size)
+                    switch (unplacedAnimals[i].Size)
                     {
                         case AnimalSize.Small:
                             animalAmounts[3]++;
@@ -199,7 +195,7 @@ namespace CircuzRenzOpReis.Logic
                 }
                 else
                 {
-                    switch (Animals[i].Size)
+                    switch (unplacedAnimals[i].Size)
                     {
                         case AnimalSize.Small:
                             animalAmounts[0]++;
@@ -214,21 +210,22 @@ namespace CircuzRenzOpReis.Logic
                 }
             }
 
-            // CHECK FOR THE AMOUNT OF ANIMALS HERE! if it's 0, we can just return the wagon to save some time.
 
-            // 2. determine amount of available space
-            switch (original.getAvailableSpace())
+            //Kijk naar de vrije plek in de wagon, als dit 10 is kun je de wagon terug geven. Dat wil zeggen dat die leeg is
+
+            //2. Kijk naar de plek in de wagon
+            switch (originalWagon.GetAvailableSpace())
             {
-                // 3. try combinations that use that amount of space
+                //3. Alle mogelijke combinaties
                 case 10:
-                    // Two large herbivores
+                    //2 grote herbivoren
                     if (animalAmounts[2] >= 2)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Large));
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Large));
                         return AnimalsToAdd;
                     }
-                    // 1 large herbivore, 1 medium herbivore, 2 small herbivores
+                    //1 grote herbivoor, 1 middel herbivoor, 2 kleine herbivoren
                     if (animalAmounts[2] >= 1 && animalAmounts[1] >= 1 && animalAmounts[0] >= 2)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Large));
@@ -237,7 +234,7 @@ namespace CircuzRenzOpReis.Logic
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Small));
                         return AnimalsToAdd;
                     }
-                    //  3 medium herbivores, 1 small herbivore
+                    //3 middel herbivoren, 1 kleine herbivoor
                     if (animalAmounts[1] >= 3 && animalAmounts[0] >= 1)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Medium));
@@ -246,7 +243,7 @@ namespace CircuzRenzOpReis.Logic
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Small));
                         return AnimalsToAdd;
                     }
-                    // 1 large herbivore, 5 small herbivores
+                    //1 grote herbivoor 5 kleine herbivoren
                     if (animalAmounts[2] >= 1 && animalAmounts[0] >= 5)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Large));
@@ -254,7 +251,7 @@ namespace CircuzRenzOpReis.Logic
                             AnimalsToAdd.Add(new Animal(false, AnimalSize.Small));
                         return AnimalsToAdd;
                     }
-                    // 2 medium herbivores, 4 small herbivores
+                    //2 middel herbivoren, 4 kleine herbivoren
                     if (animalAmounts[1] >= 2 && animalAmounts[0] >= 4)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Medium));
@@ -265,7 +262,7 @@ namespace CircuzRenzOpReis.Logic
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Small));
                         return AnimalsToAdd;
                     }
-                    // 1 medium herbivore, 7 small herbivores
+                    //1 middel herbivoor, 7 kleine herbivoren
                     if (animalAmounts[1] >= 1 && animalAmounts[0] >= 7)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Medium));
@@ -273,7 +270,7 @@ namespace CircuzRenzOpReis.Logic
                             AnimalsToAdd.Add(new Animal(false, AnimalSize.Small));
                         return AnimalsToAdd;
                     }
-                    // 10 small herbivores
+                    //10 kleine herbivoren
                     if (animalAmounts[0] >= 10)
                     {
                         for (int i = 0; i < 10; i++)
@@ -283,7 +280,7 @@ namespace CircuzRenzOpReis.Logic
                     goto case 9;
 
                 case 9:
-                    // 1 large herbivore, 1 medium herbivore, 1 small herbivore
+                    //1 grote herbivoor, 1 middel herbivoor, 1 kleine herbivoor
                     if (animalAmounts[2] >= 1 && animalAmounts[1] >= 1 && animalAmounts[0] >= 1)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Large));
@@ -291,7 +288,7 @@ namespace CircuzRenzOpReis.Logic
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Small));
                         return AnimalsToAdd;
                     }
-                    // 3 medium herbivores
+                    //3 middel herbivoren
                     if (animalAmounts[1] >= 3)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Medium));
@@ -299,7 +296,7 @@ namespace CircuzRenzOpReis.Logic
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Medium));
                         return AnimalsToAdd;
                     }
-                    // 1 large herbivore, 4 small herbivores
+                    //1 grote herbivoor, 4 kleine herbivoren
                     if (animalAmounts[2] >= 1 && animalAmounts[0] >= 4)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Large));
@@ -309,7 +306,7 @@ namespace CircuzRenzOpReis.Logic
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Small));
                         return AnimalsToAdd;
                     }
-                    // 2 medium herbivores, 3 small herbivores
+                    //2 middel herbivoren, 3 kleine herbivoren
                     if (animalAmounts[1] >= 2 && animalAmounts[0] >= 3)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Medium));
@@ -319,7 +316,7 @@ namespace CircuzRenzOpReis.Logic
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Small));
                         return AnimalsToAdd;
                     }
-                    // 1 medium herbivore, 6 small herbivores
+                    //1 middel herbivoor, 6 kleine herbivoren
                     if (animalAmounts[1] >= 1 && animalAmounts[0] >= 6)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Medium));
@@ -327,7 +324,7 @@ namespace CircuzRenzOpReis.Logic
                             AnimalsToAdd.Add(new Animal(false, AnimalSize.Small));
                         return AnimalsToAdd;
                     }
-                    // 9 small herbivores
+                    //9 kleine herbivoren
                     if (animalAmounts[0] >= 9)
                     {
                         for (int i = 0; i < 9; i++)
@@ -337,14 +334,14 @@ namespace CircuzRenzOpReis.Logic
                     goto case 8;
 
                 case 8:
-                    // 1 large herbivore, 1 medium herbivore
+                    //1 grote herbivoor, 1 middel herbivoor
                     if (animalAmounts[2] >= 1 && animalAmounts[1] >= 1)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Large));
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Medium));
                         return AnimalsToAdd;
                     }
-                    // 1 large herbivore, 3 small herbivores
+                    //1 grote herbivoor, 3 kleine herbivoren
                     if (animalAmounts[2] >= 1 && animalAmounts[0] >= 3)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Large));
@@ -353,7 +350,7 @@ namespace CircuzRenzOpReis.Logic
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Small));
                         return AnimalsToAdd;
                     }
-                    // 2 medium herbivores, 2 small herbivores
+                    //2 middel herbivoren, 2 kleine herbivoren
                     if (animalAmounts[1] >= 2 && animalAmounts[0] >= 2)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Medium));
@@ -362,7 +359,7 @@ namespace CircuzRenzOpReis.Logic
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Small));
                         return AnimalsToAdd;
                     }
-                    // 1 medium herbivore, 5 small herbivores
+                    //1 middel herbivoor, 5 kleine herbivoren
                     if (animalAmounts[1] >= 1 && animalAmounts[0] >= 5)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Medium));
@@ -370,7 +367,7 @@ namespace CircuzRenzOpReis.Logic
                             AnimalsToAdd.Add(new Animal(false, AnimalSize.Small));
                         return AnimalsToAdd;
                     }
-                    // 8 small herbivores
+                    //8 kleine herbivoren 
                     if (animalAmounts[0] >= 8)
                     {
                         for (int i = 0; i < 8; i++)
@@ -378,8 +375,9 @@ namespace CircuzRenzOpReis.Logic
                         return AnimalsToAdd;
                     }
                     goto case 7;
+
                 case 7:
-                    // 2 medium herbivores, 1 small herbivore
+                    //2 middel herbivoren, 1 kleine herbivoor
                     if (animalAmounts[1] >= 2 && animalAmounts[0] >= 1)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Medium));
@@ -387,7 +385,7 @@ namespace CircuzRenzOpReis.Logic
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Small));
                         return AnimalsToAdd;
                     }
-                    // 1 large herbivore, 2 small herbivores
+                    //1 grote herbivoor, 2 kleine herbivoren
                     if (animalAmounts[2] >= 1 && animalAmounts[0] >= 2)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Large));
@@ -395,7 +393,7 @@ namespace CircuzRenzOpReis.Logic
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Small));
                         return AnimalsToAdd;
                     }
-                    // 1 medium herbivore, 4 small herbivores
+                    //1 middel herbivoor, 4 kleine herbivoren
                     if (animalAmounts[1] >= 1 && animalAmounts[0] >= 4)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Medium));
@@ -403,7 +401,7 @@ namespace CircuzRenzOpReis.Logic
                             AnimalsToAdd.Add(new Animal(false, AnimalSize.Small));
                         return AnimalsToAdd;
                     }
-                    // 7 small herbivores
+                    //7 kleine herbivoren
                     if (animalAmounts[0] >= 7)
                     {
                         for (int i = 0; i < 7; i++)
@@ -413,21 +411,21 @@ namespace CircuzRenzOpReis.Logic
                     goto case 6;
 
                 case 6:
-                    // 1 large herbivore, 1 small herbivore
+                    //1 grote herbivoor, 1 kleine herbivoor
                     if (animalAmounts[2] >= 1 && animalAmounts[0] >= 1)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Large));
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Small));
                         return AnimalsToAdd;
                     }
-                    // 2 medium herbivores
+                    //2 middel herbivoren
                     if (animalAmounts[1] >= 2)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Medium));
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Medium));
                         return AnimalsToAdd;
                     }
-                    // 1 medium herbivore, 3 small herbivores
+                    //1 middel herbivoor, 3 kleine herbivoren
                     if (animalAmounts[1] >= 1 && animalAmounts[0] >= 3)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Medium));
@@ -436,7 +434,7 @@ namespace CircuzRenzOpReis.Logic
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Small));
                         return AnimalsToAdd;
                     }
-                    // 6 small herbivores
+                    //6 kleine herbivoren
                     if (animalAmounts[0] >= 6)
                     {
                         for (int i = 0; i < 6; i++)
@@ -446,13 +444,13 @@ namespace CircuzRenzOpReis.Logic
                     goto case 5;
 
                 case 5:
-                    // 1 large herbivore
+                    //1 grote herbivoor
                     if (animalAmounts[2] >= 1)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Large));
                         return AnimalsToAdd;
                     }
-                    // 1 medium herbivore, 2 small herbivores
+                    //1 middel herbivoor, 2 kleine herbivoren
                     if (animalAmounts[1] >= 1 && animalAmounts[0] >= 2)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Medium));
@@ -460,7 +458,7 @@ namespace CircuzRenzOpReis.Logic
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Small));
                         return AnimalsToAdd;
                     }
-                    // 5 small herbivores
+                    //5 kleine herbivoren
                     if (animalAmounts[0] >= 5)
                     {
                         for (int i = 0; i < 5; i++)
@@ -470,14 +468,14 @@ namespace CircuzRenzOpReis.Logic
                     goto case 4;
 
                 case 4:
-                    // 1 medium herbivore, 1 small herbivore
+                    //1 middel herbivoor, 1 kleine herbivoor
                     if (animalAmounts[1] >= 1 && animalAmounts[0] >= 1)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Medium));
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Small));
                         return AnimalsToAdd;
                     }
-                    // 4 small herbivores
+                    //4 kleine herbivoren
                     if (animalAmounts[0] >= 4)
                     {
                         for (int i = 0; i < 4; i++)
@@ -487,13 +485,13 @@ namespace CircuzRenzOpReis.Logic
                     goto case 3;
 
                 case 3:
-                    // 1 medium herbivore
+                    //1 middel herbivoor
                     if (animalAmounts[1] >= 1)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Medium));
                         return AnimalsToAdd;
                     }
-                    // 3 small herbivores
+                    //3 kleine herbivoren
                     if (animalAmounts[0] >= 3)
                     {
                         for (int i = 0; i < 3; i++)
@@ -503,7 +501,7 @@ namespace CircuzRenzOpReis.Logic
                     goto case 2;
 
                 case 2:
-                    // 2 small herbivores
+                    //2 kleine herbivoren
                     if (animalAmounts[0] >= 2)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Small));
@@ -513,7 +511,7 @@ namespace CircuzRenzOpReis.Logic
                     goto case 1;
 
                 case 1:
-                    // 1 small herbivore
+                    //1 kleine herbivoor
                     if (animalAmounts[0] >= 1)
                     {
                         AnimalsToAdd.Add(new Animal(false, AnimalSize.Small));
@@ -524,5 +522,8 @@ namespace CircuzRenzOpReis.Logic
 
             return AnimalsToAdd;
         }
+        #endregion
+
+
     }
 }

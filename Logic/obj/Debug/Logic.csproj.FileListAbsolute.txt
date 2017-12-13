@@ -3,3 +3,8 @@ c:\users\daphn\onedrive\documenten\visual studio 2017\Projects\CircusRenzOpReis\
 c:\users\daphn\onedrive\documenten\visual studio 2017\Projects\CircusRenzOpReis\Logic\obj\Debug\Logic.csprojResolveAssemblyReference.cache
 c:\users\daphn\onedrive\documenten\visual studio 2017\Projects\CircusRenzOpReis\Logic\obj\Debug\Logic.dll
 c:\users\daphn\onedrive\documenten\visual studio 2017\Projects\CircusRenzOpReis\Logic\obj\Debug\Logic.pdb
+D:\Software Projecten\Circus Renz Op Reis\Logic\bin\Debug\Logic.dll
+D:\Software Projecten\Circus Renz Op Reis\Logic\bin\Debug\Logic.pdb
+D:\Software Projecten\Circus Renz Op Reis\Logic\obj\Debug\Logic.dll
+D:\Software Projecten\Circus Renz Op Reis\Logic\obj\Debug\Logic.pdb
+D:\Software Projecten\Circus Renz Op Reis\Logic\obj\Debug\Logic.csprojResolveAssemblyReference.cache

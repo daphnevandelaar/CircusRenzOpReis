@@ -80,7 +80,7 @@ namespace CircuzRenzOpReis.Logic
             return copy;                                    // return the cloned wagon
         }
 
-        public int getAvailableSpace()
+        public int GetAvailableSpace()
         {
             int space = 10;
             foreach (Animal a in animals)

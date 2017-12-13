@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CircusRenzOpReis.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,9 +16,10 @@ namespace CircusRenzOpReis.Controllers
 
         public ActionResult About()
         {
+
             ViewBag.Message = "Your application description page.";
 
-
+            AnimalsViewModel view = new AnimalsViewModel();
 
             return View();
         }

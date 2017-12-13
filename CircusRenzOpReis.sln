@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircusRenzOpReis.Tests", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{A0DF3BE8-6D58-4245-92AA-588693A24809}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Circustrein", "C:\Users\daphn\Desktop\Circustrein\Circustrein\Circustrein.csproj", "{462914C2-107B-4A20-8142-BF4483B2CFF8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircusRenzOpReis.PresentationWPF", "C:\Users\daphn\Desktop\Circustrein\Circustrein\CircusRenzOpReis.PresentationWPF.csproj", "{462914C2-107B-4A20-8142-BF4483B2CFF8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
