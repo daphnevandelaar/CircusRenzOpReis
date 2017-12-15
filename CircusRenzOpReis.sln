@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircusRenzOpReis.PresentationWPF", "C:\Users\daphn\Desktop\Circustrein\Circustrein\CircusRenzOpReis.PresentationWPF.csproj", "{462914C2-107B-4A20-8142-BF4483B2CFF8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircusRenzOpReis.WPF", "CircusRenzOpReis.WPF\CircusRenzOpReis.WPF.csproj", "{EFE12720-E3EF-424C-B1A8-6F13696C5BC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{462914C2-107B-4A20-8142-BF4483B2CFF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{462914C2-107B-4A20-8142-BF4483B2CFF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{462914C2-107B-4A20-8142-BF4483B2CFF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFE12720-E3EF-424C-B1A8-6F13696C5BC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFE12720-E3EF-424C-B1A8-6F13696C5BC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFE12720-E3EF-424C-B1A8-6F13696C5BC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFE12720-E3EF-424C-B1A8-6F13696C5BC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
