@@ -113,7 +113,7 @@ namespace CircuzRenzOpReis.Logic
                 animalsToAdd = SortWagonWithCheckCombinations(wagonsWhichCanBeFilled[0], animalsLeft);
 
                 //Plaats de dieren in de wagon
-                for (int i = 0; i < animalsToAdd.Count; i++)
+                for (int i = animalsToAdd.Count - 1; i >= 0; i--)
                 {
                     if (wagonsWhichCanBeFilled[0].addAnimal(animalsToAdd[i]))
                     {
@@ -141,13 +141,13 @@ namespace CircuzRenzOpReis.Logic
         public object Clone()
         {
             Train copy = (Train)this.MemberwiseClone();
-            copy.Wagons.Clear(); // remove the references to the original wagons
+            copy.Wagons.Clear(); //remove the references to the original wagons
             foreach (Wagon w in Wagons)
                 copy.Wagons.Add((Wagon)w.Clone());
             return copy;
         }
 
-        // solves a wagon, returns the animals that should be added
+        //best mogelijke optie om een wagon te vullen
         public List<Animal> SortWagonWithCheckCombinations(Wagon originalWagon, List<Animal> unplacedAnimals)
         {
             List<Animal> AnimalsToAdd = new List<Animal>();

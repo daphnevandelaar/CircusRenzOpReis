@@ -8,3 +8,9 @@ D:\Software Projecten\Circus Renz Op Reis\Logic\bin\Debug\Logic.pdb
 D:\Software Projecten\Circus Renz Op Reis\Logic\obj\Debug\Logic.dll
 D:\Software Projecten\Circus Renz Op Reis\Logic\obj\Debug\Logic.pdb
 D:\Software Projecten\Circus Renz Op Reis\Logic\obj\Debug\Logic.csprojResolveAssemblyReference.cache
+D:\Software projects\CircusRenz\CircusRenzOpReis\Logic\bin\Debug\Logic.dll
+D:\Software projects\CircusRenz\CircusRenzOpReis\Logic\bin\Debug\Logic.pdb
+D:\Software projects\CircusRenz\CircusRenzOpReis\Logic\obj\Debug\Logic.csproj.CoreCompileInputs.cache
+D:\Software projects\CircusRenz\CircusRenzOpReis\Logic\obj\Debug\Logic.dll
+D:\Software projects\CircusRenz\CircusRenzOpReis\Logic\obj\Debug\Logic.pdb
+D:\Software projects\CircusRenz\CircusRenzOpReis\Logic\obj\Debug\Logic.csprojResolveAssemblyReference.cache

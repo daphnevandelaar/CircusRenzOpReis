@@ -1,0 +1,5 @@
+D:\Software projects\CircusRenz\CircusRenzOpReis\CircusRenzOpReis.PresentationWPF\obj\Debug\CircusRenzOpReis.PresentationWPF.csprojResolveAssemblyReference.cache
+D:\Software projects\CircusRenz\CircusRenzOpReis\CircusRenzOpReis.PresentationWPF\obj\Debug\MainWindow.g.cs
+D:\Software projects\CircusRenz\CircusRenzOpReis\CircusRenzOpReis.PresentationWPF\obj\Debug\App.g.cs
+D:\Software projects\CircusRenz\CircusRenzOpReis\CircusRenzOpReis.PresentationWPF\obj\Debug\CircusRenzOpReis.PresentationWPF_MarkupCompile.cache
+D:\Software projects\CircusRenz\CircusRenzOpReis\CircusRenzOpReis.PresentationWPF\obj\Debug\CircusRenzOpReis.PresentationWPF_MarkupCompile.lref

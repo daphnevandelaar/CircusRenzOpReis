@@ -1,7 +1,53 @@
-﻿@{
-    ViewBag.Title = "About";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+﻿<select name="sometext" size="5">
+    <option>text1</option>
+    <option>text2</option>
+    <option>text3</option>
+    <option>text4</option>
+    <option>text5</option>
+</select>
 
-<p>Use this area to provide additional information.</p>
+@using (Html.BeginForm("ArrangeAnimals", "Home", FormMethod.Post))
+{
+
+    <div id="dynamicInput">
+        <input type="radio" id="rbCarnivore" name="rbType" checked="checked"/> Carnivore
+        <input type="radio" id="rbHerbivore" name="rbType"/> Herbivore
+    </div>
+    <input type="button" value="Add another animal" onClick="addInput('dynamicInput');">
+
+    <input type="submit" name="btnSub" value="Heeeeeee"/>
+}
+
+
+<script>
+    var counter = 0;
+    var limit = 50;
+    var animalType = true;
+    function addInput(divName){
+        if (counter == limit)  {
+            alert("You have reached the limit of adding " + counter + " inputs");
+        }
+        else {
+            var newdiv = document.createElement('div');
+            if (document.getElementById("rbCarnivore").checked) {
+                animalType = true;
+                newdiv.innerHTML = "Dier " + (counter + 1) + "<select name='Animals'>" +
+                    "<option>Large Carnivore</option>" +
+                    "<option>Medium Carnivore</option>" +
+                    "<option>Small Carnivore</option>" +
+                    "</select>";
+            }
+            else if (document.getElementById("rbHerbivore").checked) {
+                animalType = false;
+                newdiv.innerHTML = "Dier " + (counter + 1) + "<select name='Animals'>" +
+                    "<option>Large Herbivore</option>" +
+                    "<option>Medium Herbivore</option>" +
+                    "<option>Small Herbivore</option>" +
+                    "</select>";
+            }
+            
+            document.getElementById(divName).appendChild(newdiv);
+            counter++;
+        }
+    }
+</script>
